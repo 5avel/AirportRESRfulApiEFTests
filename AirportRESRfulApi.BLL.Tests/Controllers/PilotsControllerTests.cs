@@ -60,5 +60,23 @@ namespace AirportRESRfulApi.BLL.Tests.Controllers
             Assert.NotNull(result);
             Assert.AreEqual(((result as OkObjectResult).Value as PilotDto).FirstName, testList.SingleOrDefault(x => x.Id == 1).FirstName);
         }
+
+        [Test]
+        public void Delete_Valid()
+        {
+            IActionResult result = controller.Delete(1);
+
+            Assert.NotNull(result);
+            Assert.AreEqual((result as OkObjectResult).StatusCode, 200);
+        }
+
+        [Test]
+        public void Delete_InValid()
+        {
+            IActionResult result = controller.Delete(9);
+
+            Assert.NotNull(result);
+            Assert.AreEqual((result as OkObjectResult).StatusCode, 404);
+        }
     }
 }
