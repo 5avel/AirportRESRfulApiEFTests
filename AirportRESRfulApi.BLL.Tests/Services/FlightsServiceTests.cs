@@ -5,12 +5,9 @@ using AirportRESRfulApi.DAL.Interfaces;
 using AirportRESRfulApi.DAL.Models;
 using AirportRESRfulApi.Shared.DTO;
 using AutoMapper;
-using FakeItEasy;
 using FluentValidation;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AirportRESRfulApi.BLL.Tests.Services
 {
@@ -39,8 +36,6 @@ namespace AirportRESRfulApi.BLL.Tests.Services
         [SetUp]
         public void Init()
         {
-            
-
             
         }
 
