@@ -1,4 +1,4 @@
-# AirportRESRfulApiEF
+# AirportRESRfulApiEF TESTS
 ASP.NET Core Web API for Airport
 
 How to compile
