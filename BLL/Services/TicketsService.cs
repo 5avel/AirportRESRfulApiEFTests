@@ -1,12 +1,13 @@
 ﻿using AirportRESRfulApi.BLL.Interfaces;
+using AirportRESRfulApi.BLL.Validations;
 using AirportRESRfulApi.DAL.Interfaces;
 using AirportRESRfulApi.DAL.Models;
 using AirportRESRfulApi.Shared.DTO;
 using AutoMapper;
 using FluentValidation;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AirportRESRfulApi.BLL.Services
 {
@@ -45,7 +46,9 @@ namespace AirportRESRfulApi.BLL.Services
         public bool Make(IEnumerable<TicketDto> entitys)
         {
             _validator.Validate(entitys);
-            _repository.Create(Mapper.Map<IEnumerable<TicketDto>, IEnumerable<Ticket>>(entitys));
+            var tickets = _mapper.Map<IEnumerable<TicketDto>, IEnumerable<Ticket>>(entitys);
+            _repository.Create(tickets);
+            _unitOfWork.SaveChages();
             return true; 
         }
 

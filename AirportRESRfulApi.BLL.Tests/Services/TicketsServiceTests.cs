@@ -1,17 +1,16 @@
-﻿namespace AirportRESRfulApi.BLL.Tests
+﻿namespace AirportRESRfulApi.BLL.Tests.Services
 {
-    using System;
-    using NUnit.Framework;
-    using FakeItEasy;
-    using AirportRESRfulApi.BLL;
+    using AirportRESRfulApi.BLL.Services;
     using AirportRESRfulApi.DAL.Interfaces;
-    using FluentValidation;
-    using AutoMapper;
-    using Shared.DTO;
     using AirportRESRfulApi.DAL.Models;
-    using System.Linq;
+    using AutoMapper;
+    using FakeItEasy;
+    using FluentValidation;
+    using NUnit.Framework;
+    using Shared.DTO;
     using System.Collections.Generic;
-    using System.Linq.Expressions;
+    using System.Linq;
+
 
     [TestFixture]
     public class TicketsServiceTests
@@ -24,6 +23,12 @@
         private List<Ticket> ticketList;
 
         public TicketsServiceTests()
+        {
+            
+        } 
+
+        [SetUp]
+        public void Init()
         {
             unitOfWork = A.Fake<IUnitOfWork>();
             repository = A.Fake<IRepository<Ticket>>();
@@ -39,11 +44,7 @@
                 .Where(call => call.Method.Name == "Set")
                 .WithReturnType<IRepository<Ticket>>()
                 .Returns(repository);
-        } 
 
-        [SetUp]
-        public void Init()
-        {
             ticketList = new List<Ticket>
                  {
                     new Ticket
@@ -55,6 +56,13 @@
                     new Ticket
                     { Id = 4, Flight = null, FlightId = 1,IsSold = true, PlaseNumber = 4,FlightNumber = "QW11", Price = 200}
                  };
+        }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            // Clean up data in our fake dependencies.
+           
         }
 
         private void SetCollection(int id)
@@ -70,12 +78,12 @@
         [TestCase(2)]
         public void BuyById_TicketId_TicketIsSold_true(int id)
         {
+            //arange
             SetCollection(id);
-
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
-
+            TicketsService ts = new TicketsService(unitOfWork, mapper, validator);
+            //act
             var result = ts.BuyById(id);
-
+            //assert
             Assert.IsTrue(result.IsSold);
         }
 
@@ -83,12 +91,12 @@
         [TestCase(4)]
         public void BuyById_TicketId_Ticket_null(int id)
         {
+            //arange
             SetCollection(id);
-
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
-
+            TicketsService ts = new TicketsService(unitOfWork, mapper, validator);
+            //act
             var result = ts.BuyById(id);
-
+            //assert
             Assert.IsNull(result);
         }
 
@@ -96,12 +104,12 @@
         [TestCase(3)]
         public void ReturnById_TicketId_TicketIsSold_true(int id)
         {
+            //arange
             SetCollection(id);
-
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
-
+            TicketsService ts = new TicketsService(unitOfWork, mapper, validator);
+            //act
             var result = ts.ReturnById(id);
-
+            //assert
             Assert.IsFalse(result.IsSold);
         }
 
@@ -109,37 +117,35 @@
         [TestCase(1)]
         public void ReturnById_TicketId_Ticket_null(int id)
         {
+            //arange
             SetCollection(id);
-
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
-
+            TicketsService ts = new TicketsService(unitOfWork, mapper, validator);
+            //act
             var result = ts.ReturnById(id);
-
+            //assert
             Assert.IsNull(result);
         }
 
-        public void ReturnById_TicketId_Ticket_null(int id)
+        [Test]
+        public void MakeListTickets_UfSaveChages_Once()
         {
-            SetCollection(id);
+            //arange
+            var ticketsDto = new List<TicketDto>
+                 {
+                    new TicketDto { Id = 1, FlightId = 1,IsSold = false, PlaseNumber = 1,FlightNumber = "TY26", Price = 200},
+                    new TicketDto { Id = 2, FlightId = 1,IsSold = false, PlaseNumber = 2,FlightNumber = "TY26", Price = 200},
+                    new TicketDto { Id = 3, FlightId = 1,IsSold = true, PlaseNumber = 3,FlightNumber = "QW11", Price = 200},
+                    new TicketDto { Id = 4, FlightId = 1,IsSold = true, PlaseNumber = 4,FlightNumber = "QW11", Price = 200}
+                 };
 
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
+            TicketsService ts = new TicketsService(unitOfWork, mapper, validator);
 
-            var result = ts.ReturnById(id);
+            //act
+            ts.Make(ticketsDto);
 
-            Assert.IsNull(result);
+            //assert
+            A.CallTo(() => unitOfWork.SaveChages()).MustHaveHappened(Repeated.Exactly.Once);
+
         }
-
-        public void BuyById_TicketId_Ticket_null(int id)
-        {
-            SetCollection(id);
-
-            Services.TicketsService ts = new Services.TicketsService(unitOfWork, mapper, validator);
-
-            var result = ts.BuyById(id);
-
-            Assert.IsNull(result);
-        }
-
-
     }
 }

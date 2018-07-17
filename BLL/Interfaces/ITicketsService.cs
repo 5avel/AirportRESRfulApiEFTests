@@ -11,5 +11,6 @@ namespace AirportRESRfulApi.BLL.Interfaces
         TicketDto BuyById(int id);
         TicketDto ReturnById(int id);
         bool Make(IEnumerable<TicketDto> entitys);
+       
     }
 }

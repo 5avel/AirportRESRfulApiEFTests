@@ -29,12 +29,21 @@ namespace AirportRESRfulApi.DAL
             return query.ToList();
         }
 
+        public virtual TEntity GetById(int id)
+        {
+            IQueryable<TEntity> query = context.Set<TEntity>();
+
+            var entity = query.SingleOrDefault(x => x.Id == id);
+
+            return entity;
+        }
+
         public virtual void Create(TEntity entity, string createdBy = null)
         {
             context.Set<TEntity>().Add(entity);
         }
 
-        public virtual void Create(IEnumerable<TEntity> entitys, string createdBy = null)
+        public virtual void Create(IEnumerable<TEntity> entitys)
         {
             context.Set<TEntity>().AddRange(entitys);
         }

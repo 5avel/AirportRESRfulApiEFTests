@@ -20,6 +20,7 @@ namespace AirportRESRfulApi.BLL.Services
 
         public override void Make(FlightDto entity)
         {
+
             _validator.Validate(entity);
             base.Make(entity);
         }
