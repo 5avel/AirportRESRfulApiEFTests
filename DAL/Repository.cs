@@ -38,7 +38,7 @@ namespace AirportRESRfulApi.DAL
             return entity;
         }
 
-        public virtual void Create(TEntity entity, string createdBy = null)
+        public virtual void Create(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
         }
@@ -48,7 +48,7 @@ namespace AirportRESRfulApi.DAL
             context.Set<TEntity>().AddRange(entitys);
         }
 
-        public virtual void Update(TEntity entity, string modifiedBy = null)
+        public virtual void Update(TEntity entity)
         {
             context.Set<TEntity>().Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
