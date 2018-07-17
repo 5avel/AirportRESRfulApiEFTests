@@ -17,6 +17,6 @@
 
         public ICollection<Ticket> Tickets { set; get; }
 
-        public Departure Departure { set; get; }
+        public Departure Departure { get; set; }
     }
 }

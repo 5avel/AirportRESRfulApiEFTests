@@ -105,14 +105,14 @@ namespace AirportRESRfulApi.DAL
                 new Stewardess { Id = 5, CrewId = 2, FirstName = "Lena", LastName = "Penhjd", Birthday = new DateTime(1987, 1, 24) }                   
                 );
             builder.Entity<Plane>().HasData(
-                new Plane { Id = 1, DepartureId = 1, Name = "dfg4456", ReleaseDate = new DateTime(1995, 1, 22) },
-                new Plane { Id = 2, DepartureId = 2, Name = "QQWS1298", ReleaseDate = new DateTime(1995, 1, 22) },
-                new Plane { Id = 3, DepartureId = 3, Name = "INB677", ReleaseDate = new DateTime(1995, 1, 22) }
+                new Plane { Id = 1, DepartureId = 1, PlaneTypeId = 1, Name = "dfg4456", ReleaseDate = new DateTime(1995, 1, 22) },
+                new Plane { Id = 2, DepartureId = 2, PlaneTypeId = 2, Name = "QQWS1298", ReleaseDate = new DateTime(1995, 1, 22) },
+                new Plane { Id = 3, DepartureId = 3, PlaneTypeId = 3, Name = "INB677", ReleaseDate = new DateTime(1995, 1, 22) }
                 );
             builder.Entity<PlaneType>().HasData(
-                new PlaneType { Id = 1, Model = "AN140", PlaneId = 1, Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(200, 0, 0, 0) },
-                new PlaneType { Id = 2, Model = "IL235", PlaneId = 2, Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(250, 0, 0, 0) },
-                new PlaneType { Id = 3, Model = "A380", PlaneId = 3, Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(300, 0, 0, 0) }
+                new PlaneType { Id = 1, Model = "AN140", Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(200, 0, 0, 0) },
+                new PlaneType { Id = 2, Model = "IL235",  Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(250, 0, 0, 0) },
+                new PlaneType { Id = 3, Model = "A380",  Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(300, 0, 0, 0) }
                 );
         }
     }

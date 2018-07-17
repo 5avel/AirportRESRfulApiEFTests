@@ -149,6 +149,8 @@ namespace AirportRESRfulApi.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int>("PlaneTypeId");
+
                     b.Property<DateTime>("ReleaseDate");
 
                     b.HasKey("Id");
@@ -156,12 +158,14 @@ namespace AirportRESRfulApi.DAL.Migrations
                     b.HasIndex("DepartureId")
                         .IsUnique();
 
+                    b.HasIndex("PlaneTypeId");
+
                     b.ToTable("Planes");
 
                     b.HasData(
-                        new { Id = 1, DepartureId = 1, Name = "dfg4456", ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                        new { Id = 2, DepartureId = 2, Name = "QQWS1298", ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                        new { Id = 3, DepartureId = 3, Name = "INB677", ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                        new { Id = 1, DepartureId = 1, Name = "dfg4456", PlaneTypeId = 1, ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                        new { Id = 2, DepartureId = 2, Name = "QQWS1298", PlaneTypeId = 2, ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                        new { Id = 3, DepartureId = 3, Name = "INB677", PlaneTypeId = 3, ReleaseDate = new DateTime(1995, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                     );
                 });
 
@@ -177,8 +181,6 @@ namespace AirportRESRfulApi.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("PlaneId");
-
                     b.Property<int>("Range");
 
                     b.Property<int>("Seats");
@@ -187,15 +189,12 @@ namespace AirportRESRfulApi.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlaneId")
-                        .IsUnique();
-
                     b.ToTable("PlaneTypes");
 
                     b.HasData(
-                        new { Id = 1, Capacity = 5000, Model = "AN140", PlaneId = 1, Range = 2345, Seats = 23, ServiceLifeInTicks = 172800000000000L },
-                        new { Id = 2, Capacity = 5000, Model = "IL235", PlaneId = 2, Range = 2345, Seats = 23, ServiceLifeInTicks = 216000000000000L },
-                        new { Id = 3, Capacity = 5000, Model = "A380", PlaneId = 3, Range = 2345, Seats = 23, ServiceLifeInTicks = 259200000000000L }
+                        new { Id = 1, Capacity = 5000, Model = "AN140", Range = 2345, Seats = 23, ServiceLifeInTicks = 172800000000000L },
+                        new { Id = 2, Capacity = 5000, Model = "IL235", Range = 2345, Seats = 23, ServiceLifeInTicks = 216000000000000L },
+                        new { Id = 3, Capacity = 5000, Model = "A380", Range = 2345, Seats = 23, ServiceLifeInTicks = 259200000000000L }
                     );
                 });
 
@@ -290,7 +289,7 @@ namespace AirportRESRfulApi.DAL.Migrations
 
             modelBuilder.Entity("AirportRESRfulApi.DAL.Models.Departure", b =>
                 {
-                    b.HasOne("AirportRESRfulApi.DAL.Models.Flight", "Flight")
+                    b.HasOne("AirportRESRfulApi.DAL.Models.Flight")
                         .WithOne("Departure")
                         .HasForeignKey("AirportRESRfulApi.DAL.Models.Departure", "FlightId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -310,13 +309,10 @@ namespace AirportRESRfulApi.DAL.Migrations
                         .WithOne("Plane")
                         .HasForeignKey("AirportRESRfulApi.DAL.Models.Plane", "DepartureId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
 
-            modelBuilder.Entity("AirportRESRfulApi.DAL.Models.PlaneType", b =>
-                {
-                    b.HasOne("AirportRESRfulApi.DAL.Models.Plane")
-                        .WithOne("PlaneType")
-                        .HasForeignKey("AirportRESRfulApi.DAL.Models.PlaneType", "PlaneId")
+                    b.HasOne("AirportRESRfulApi.DAL.Models.PlaneType", "PlaneType")
+                        .WithMany()
+                        .HasForeignKey("PlaneTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -330,7 +326,7 @@ namespace AirportRESRfulApi.DAL.Migrations
 
             modelBuilder.Entity("AirportRESRfulApi.DAL.Models.Ticket", b =>
                 {
-                    b.HasOne("AirportRESRfulApi.DAL.Models.Flight", "Flight")
+                    b.HasOne("AirportRESRfulApi.DAL.Models.Flight")
                         .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade);

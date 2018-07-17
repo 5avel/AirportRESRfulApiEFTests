@@ -16,15 +16,11 @@
         public int Range { set; get; }
         [Required]
         public Int64 ServiceLifeInTicks { set; get; }
-       
-
         [NotMapped]
         public TimeSpan ServiceLife
         {
             get { return TimeSpan.FromTicks(ServiceLifeInTicks); }
             set { ServiceLifeInTicks = value.Ticks; }
         }
-
-        public int PlaneId { set; get; }
     }
 }
