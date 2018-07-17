@@ -57,7 +57,8 @@ namespace AirportRESRfulApi.DAL
         public virtual void Delete(object id)
         {
             TEntity entity = context.Set<TEntity>().Find(id);
-            Delete(entity);
+            if(entity != null)
+                Delete(entity);
         }
 
         public virtual void Delete(TEntity entity)

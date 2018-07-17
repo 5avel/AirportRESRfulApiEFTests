@@ -11,6 +11,7 @@ using NUnit.Framework;
 
 namespace AirportRESRfulApi.BLL.Tests.Services
 {
+    [TestFixture]
     public class CrewsServiceTests
     {
         private IUnitOfWork unitOfWork;

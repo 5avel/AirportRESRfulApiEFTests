@@ -18,14 +18,21 @@ namespace AirportRESRfulApi.DAL
         public DbSet<Pilot> Pilots { get; set; }
         public DbSet<Stewardess> Stewardesses { get; set; }
 
-        public AirportContext(IConfiguration configuration, DbContextOptions<AirportContext> options) : base(options)
+        public AirportContext( DbContextOptions<AirportContext> options, IConfiguration configuration = null) : base(options)
         {
             this.configuration = configuration;
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("AirportMSSQLlocaldb"));
+            if (configuration != null)
+            {
+                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("AirportMSSQLlocaldb"));
+            }
+            else
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AirportDB;Trusted_Connection=True;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -94,8 +101,8 @@ namespace AirportRESRfulApi.DAL
                 );
             builder.Entity<Pilot>().HasData(
                 new Pilot { Id = 1, CrewId = 1, FirstName = "Ivan", LastName = "Ivanov", Experience = 3, Birthday = new DateTime(1987, 1, 24)},
-                new Pilot { Id = 2, CrewId = 2, FirstName = "Peta", LastName = "Penhjd", Experience = 8, Birthday = new DateTime(1987, 1, 24) },
-                new Pilot { Id = 3, CrewId = 3, FirstName = "Max", LastName = "Maximov", Experience = 6, Birthday = new DateTime(1987, 1, 24) }
+                new Pilot { Id = 2, CrewId = 2, FirstName = "Peta", LastName = "Penhjd", Experience = 8, Birthday = new DateTime(1987, 1, 24) }
+                //new Pilot { Id = 3, CrewId = 3, FirstName = "Max", LastName = "Maximov", Experience = 6, Birthday = new DateTime(1987, 1, 24) }
                 );
             builder.Entity<Stewardess>().HasData(
                 new Stewardess { Id = 1, CrewId = 1, FirstName = "Ivana", LastName = "Ivanova", Birthday = new DateTime(1987, 1, 24) },
@@ -106,8 +113,8 @@ namespace AirportRESRfulApi.DAL
                 );
             builder.Entity<Plane>().HasData(
                 new Plane { Id = 1, DepartureId = 1, PlaneTypeId = 1, Name = "dfg4456", ReleaseDate = new DateTime(1995, 1, 22) },
-                new Plane { Id = 2, DepartureId = 2, PlaneTypeId = 2, Name = "QQWS1298", ReleaseDate = new DateTime(1995, 1, 22) },
-                new Plane { Id = 3, DepartureId = 3, PlaneTypeId = 3, Name = "INB677", ReleaseDate = new DateTime(1995, 1, 22) }
+                new Plane { Id = 2, DepartureId = 2, PlaneTypeId = 2, Name = "QQWS1298", ReleaseDate = new DateTime(1995, 1, 22) }
+                
                 );
             builder.Entity<PlaneType>().HasData(
                 new PlaneType { Id = 1, Model = "AN140", Capacity = 5000, Seats = 23, Range = 2345, ServiceLife = new TimeSpan(200, 0, 0, 0) },

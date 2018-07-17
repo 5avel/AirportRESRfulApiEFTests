@@ -11,6 +11,7 @@ using System;
 
 namespace AirportRESRfulApi.BLL.Tests.Services
 {
+    [TestFixture]
     class StewardessesServiceTests
     {
         private IUnitOfWork unitOfWork;
