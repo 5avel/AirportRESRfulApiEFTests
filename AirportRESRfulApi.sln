@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirportRESRfulApi.BLL", "BL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirportRESRfulApi.DAL", "DAL\AirportRESRfulApi.DAL.csproj", "{02EE2165-67BD-4A04-B016-AF0B1A115EEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRESRfulApi.BLL.Tests", "AirportRESRfulApi.BLL.Tests\AirportRESRfulApi.BLL.Tests.csproj", "{3E352609-40E0-4401-9F19-DE564CDBA149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirportRESRfulApi.BLL.Tests", "AirportRESRfulApi.BLL.Tests\AirportRESRfulApi.BLL.Tests.csproj", "{3E352609-40E0-4401-9F19-DE564CDBA149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

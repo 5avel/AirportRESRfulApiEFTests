@@ -48,13 +48,13 @@
             ticketList = new List<Ticket>
                  {
                     new Ticket
-                    { Id = 1, Flight = null, FlightId = 1,IsSold = false, PlaseNumber = 1,FlightNumber = "TY26", Price = 200},
+                    { Id = 1, FlightId = 1,IsSold = false, PlaseNumber = 1,FlightNumber = "TY26", Price = 200},
                     new Ticket
-                    { Id = 2, Flight = null, FlightId = 1,IsSold = false, PlaseNumber = 2,FlightNumber = "TY26", Price = 200},
+                    { Id = 2, FlightId = 1,IsSold = false, PlaseNumber = 2,FlightNumber = "TY26", Price = 200},
                     new Ticket
-                    { Id = 3, Flight = null, FlightId = 1,IsSold = true, PlaseNumber = 3,FlightNumber = "QW11", Price = 200},
+                    { Id = 3, FlightId = 1,IsSold = true, PlaseNumber = 3,FlightNumber = "QW11", Price = 200},
                     new Ticket
-                    { Id = 4, Flight = null, FlightId = 1,IsSold = true, PlaseNumber = 4,FlightNumber = "QW11", Price = 200}
+                    { Id = 4, FlightId = 1,IsSold = true, PlaseNumber = 4,FlightNumber = "QW11", Price = 200}
                  };
         }
 

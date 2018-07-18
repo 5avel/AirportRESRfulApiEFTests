@@ -2,11 +2,11 @@
 {
 
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public class Ticket: Entity
     {
-        [Required]
+        [ForeignKey("FlightId")]
         public int FlightId { set; get; }
-        public Flight Flight { get; set; }
 
         [Required, MaxLength(8)]
         public string FlightNumber { set; get; }

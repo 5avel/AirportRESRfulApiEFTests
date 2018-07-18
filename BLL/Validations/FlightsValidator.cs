@@ -23,9 +23,9 @@ namespace AirportRESRfulApi.BLL.Validations
                 .MinimumLength(3)
                 .MaximumLength(100);
             RuleFor(x => x.ArrivalTime)
-                .NotEmpty();
+                .NotNull();
             RuleFor(x => x.DepartureTime)
-                .NotEmpty();
+                .NotNull();
             RuleFor(x => x).Must(f => f.DepartureTime < f.ArrivalTime)
                 .WithMessage("Время прибытия не может быть раньше времени вылета( покаместь:)) )");
         }

@@ -20,15 +20,14 @@ namespace AirportRESRfulApi.BLL.Services
 
         public override void Make(FlightDto entity)
         {
-
-            _validator.Validate(entity);
-            base.Make(entity);
+            if (_validator.Validate(entity).IsValid)
+                base.Make(entity);
         }
 
         public override void Update(FlightDto entity)
         {
-            _validator.Validate(entity);
-            base.Update(entity);
+            if(_validator.Validate(entity).IsValid)
+                base.Update(entity);
         }
 
         public FlightDto GetByFlightNumberAndDate(string flightNumber, DateTime flightDate)

@@ -1,4 +1,4 @@
-# AirportRESRfulApiEF
+# AirportRESRfulApiEF TESTS
 ASP.NET Core Web API for Airport
 
 How to compile
@@ -30,6 +30,11 @@ How to compile
 4. Use
 
 -Open Postman (https://www.getpostman.com/) or Fiddler (https://www.telerik.com/fiddler)
+
+***TESTS Postman*** --->> Download`.json` file [here](https://github.com/5avel/AirportRESRfulApiEFTests/blob/tests/AirportRESRfulApi.BLL.Tests/PSTests/AirPortTwst.postman_collection.json)
+
+![REST](https://github.com/5avel/AirportRESRfulApiEFTests/blob/tests/AirportRESRfulApi.BLL.Tests/PSTests/pmTests.jpg)
+
 ## Endpoints API
 Type |         Method        | Description                                                          | Sample
 ------|-----------------------|---------------------------------------------------------------------|--------------------------

@@ -33,8 +33,14 @@ namespace AirportRESRfulApi
             // Validators
             services.AddScoped<IValidator<TicketDto>, TicketsValidator>();
             services.AddScoped<IValidator<FlightDto>, FlightsValidator>();
+            services.AddScoped<IValidator<CrewDto>, CrewsValidator>();
+            services.AddScoped<IValidator<PilotDto>, PilotsValidator>();
+            services.AddScoped<IValidator<StewardessDto>, StewardessesValidator>();
+            services.AddScoped<IValidator<DepartureDto>, DeparturesValidator>();
+            services.AddScoped<IValidator<PlaneDto>, PlanesValidator>();
+            services.AddScoped<IValidator<PlaneTypeDto>, PlaneTypesValidator>();
 
-           
+
             // DAL Context
             services.AddDbContext<AirportContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
